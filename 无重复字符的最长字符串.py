@@ -37,7 +37,7 @@ class Solution(object):
                 alllist.append(a)
                 for j in range(len(a)):
                     if a[j] == s[i]:
-                        print a[j + 1:], s[i]
+                        # print a[j + 1:], s[i]
                         a = a[j + 1:] + s[i]
                         break
                 continue
@@ -48,12 +48,43 @@ class Solution(object):
         lengthsubstring = max(alllist)
         return lengthsubstring
 
+    def test2(self, s):
+        """从第一个字符开始，依次写入list2,在做比较，但增加m直接获取长度，总的运行时间并没有缩减，
+        已经减少类list2的增加操作"""
+        list1 = list(s)
+        list2 = []
+        mm = ''
+        m = 0
+        for i in range(len(list1)):
+            if list1[i] not in mm:
+                mm += list1[i]
+                i += 1
+                if mm not in list2:
+                # if len(mm) > m:
+                #     m = len(mm)
+                    list2.append(mm)
+            else:
+                for j in range(len(mm)):
+                    if mm[j] == list1[i]:
+                        mm = mm[j+1:] + list1[i]
+                        # if len(mm) > m:
+                        #     m = len(mm)
+                        list2.append(mm)
+                        break
+            continue
+
+        # print list2
+        for mm in list2:
+            if len(mm) > m:
+                m = len(mm)
+        return m
 
 
 if __name__ == "__main__":
-    s = 'aaabaaaaaaaaa'
+    s = 'adsfasdgferrekokwe'
     ss = Solution()
     # print ss.lengthOfLongestSubstring(s)
-    print ss.sss(s)
+    print ss.test2(s)
+    # print ss.sss(s)
 
 
